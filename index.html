@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SECURE CONNECT</title>
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="index.css" />
+  <!-- Load Tailwind CSS from CDN for modern styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-stone-100 text-gray-800">
+  
+  <!-- Header Section with Navigation -->
+  <header class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-6 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-bold">SECURE CONNECT</h1>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-6" id="desktop-nav">
+        <a href="#home" class="hover:underline text-lg font-semibold transition duration-300 ease-in-out">Home</a>
+        <a href="#how" class="hover:underline text-lg font-semibold transition duration-300 ease-in-out">How It Works</a>
+        <a href="#features" class="hover:underline text-lg font-semibold transition duration-300 ease-in-out">Features</a>
+        <a href="#about" class="hover:underline text-lg font-semibold transition duration-300 ease-in-out">About</a>
+        <a href="#contact" class="hover:underline text-lg font-semibold transition duration-300 ease-in-out">Contact</a>
+        <div id="auth-links" class="flex items-center space-x-4">
+          <a href="#login" class="bg-white text-gray-800 px-4 py-2 rounded-full font-bold shadow-md hover:bg-gray-100 transition duration-300 ease-in-out">Login</a>
+          <a href="#register" class="bg-white text-gray-800 px-4 py-2 rounded-full font-bold shadow-md hover:bg-gray-100 transition duration-300 ease-in-out">Register</a>
+        </div>
+        <div id="user-info" class="hidden items-center space-x-4">
+          <span class="text-lg font-semibold" id="welcome-message"></span>
+          <button id="logout-button" class="bg-white text-gray-800 px-4 py-2 rounded-full font-bold shadow-md hover:bg-gray-100 transition duration-300 ease-in-out">Logout</button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-nav" class="hidden md:hidden bg-gray-800 text-white p-4 transition-all duration-300 ease-in-out">
+    <nav class="flex flex-col space-y-4 text-center">
+      <a href="#home" class="block hover:bg-gray-700 p-2 rounded transition duration-300">Home</a>
+      <a href="#how" class="block hover:bg-gray-700 p-2 rounded transition duration-300">How It Works</a>
+      <a href="#features" class="block hover:bg-gray-700 p-2 rounded transition duration-300">Features</a>
+      <a href="#about" class="block hover:bg-gray-700 p-2 rounded transition duration-300">About</a>
+      <a href="#contact" class="block hover:bg-gray-700 p-2 rounded transition duration-300">Contact</a>
+      <div id="auth-links-mobile" class="flex flex-col space-y-2 mt-4">
+        <a href="#login" class="bg-white text-gray-800 px-4 py-2 rounded-full font-bold hover:bg-gray-100 transition duration-300">Login</a>
+        <a href="#register" class="bg-white text-gray-800 px-4 py-2 rounded-full font-bold hover:bg-gray-100 transition duration-300">Register</a>
+      </div>
+      <div id="user-info-mobile" class="hidden flex flex-col space-y-2 mt-4">
+        <span class="text-lg font-semibold" id="welcome-message-mobile"></span>
+        <button id="logout-button-mobile" class="bg-white text-gray-800 px-4 py-2 rounded-full font-bold hover:bg-gray-100 transition duration-300">Logout</button>
+      </div>
+    </nav>
+  </div>
+  
+  <!-- Hero Section -->
+  <section id="home" class="py-20 px-4 md:px-8 text-center bg-gradient-to-r from-stone-100 to-stone-200">
+    <div class="container mx-auto max-w-4xl">
+      <!-- Generic Welcome -->
+      <div id="generic-welcome">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800">Welcome to SECURE CONNECT</h2>
+        <p class="mt-4 text-xl md:text-2xl text-gray-600">Reimagining public communication for students and the elderly – no mobile required!</p>
+      </div>
+      <!-- Personalized Welcome (hidden by default) -->
+      <div id="personalized-welcome" class="hidden">
+        <h2 class="text-3xl md:text-4xl text-gray-600">Welcome back,</h2>
+        <p id="personalized-username" class="mt-2 text-5xl md:text-6xl font-extrabold text-gray-800"></p>
+      </div>
+      <a href="#learn-more" class="mt-8 inline-block px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out transform hover:scale-105">Learn More</a>
+    </div>
+  </section>
+  
+  <!-- How It Works Section -->
+  <section id="how" class="py-16 px-4 md:px-8">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">How It Works</h2>
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- QR/NFC ID Card Feature Box -->
+        <div class="flex-1 p-6 bg-white border border-gray-200 rounded-xl shadow-md transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <img src="src\safe-re-connect-id-detail.jpg" alt="Person tapping an NFC card on a reader" class="w-full h-48 object-cover mb-4 rounded-lg">
+          <h3 class="text-xl font-semibold text-center mb-2">QR/NFC ID Cards</h3>
+          <p class="text-center text-gray-600">Each user carries a unique card that stores essential contact and ID details, making it easy to use.</p>
+        </div>
+        <!-- Smart Booths Feature Box -->
+        <div class="flex-1 p-6 bg-white border border-gray-200 rounded-xl shadow-md transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <img src="src\safe-re-connect-booth-card.jpg" alt="Sleek and modern communication smart booth on a city street" class="w-full h-48 object-cover mb-4 rounded-lg">
+          <h3 class="text-xl font-semibold text-center mb-2">Smart Booths</h3>
+          <p class="text-center text-gray-600">Secure telephone booths at key locations read the card and connect the call instantly to a pre-defined contact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section id="features" class="py-16 px-4 md:px-8 bg-stone-200">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Features</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- No Mobile Needed Feature -->
+        <a href="#feature-no-mobile" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md text-center transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 4.5-15 15" />
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">No Mobile Needed</h3>
+          <p class="text-gray-600">Ideal for children, seniors, or areas with poor mobile access, ensuring everyone stays connected.</p>
+        </a>
+        <!-- Location-Based Access Feature -->
+        <a href="#feature-location-access" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md text-center transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Location-Based Access</h3>
+          <p class="text-gray-600">Booths are strategically placed near schools, markets, and public zones for easy access.</p>
+        </a>
+        <!-- Real-Time Notifications Feature -->
+        <a href="#feature-notifications" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md text-center transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Real-Time Notifications</h3>
+          <p class="text-gray-600">Family members get an instant alert with the user's location when a call is initiated.</p>
+        </a>
+        <!-- Secure and Private Feature -->
+        <a href="#feature-security" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md text-center transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.017h-.008v-.017Z" />
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Secure and Private</h3>
+          <p class="text-gray-600">User data is encrypted and protected with industry-standard security measures to ensure privacy.</p>
+        </a>
+        <!-- Emergency SOS Feature -->
+        <a href="#feature-sos" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md text-center transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-red-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.017h-.008v-.017Z" />
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Emergency SOS</h3>
+          <p class="text-gray-600">A dedicated SOS button connects users directly to emergency services for immediate assistance.</p>
+        </a>
+        <!-- Guardian Network Feature -->
+        <a href="#feature-guardian-network" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md text-center transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962a3.752 3.752 0 0 1-4.493 0L5.25 11.653c-1.223-1.223-.65-3.328.75-3.328h9.75c1.4 0 1.973 2.105.75 3.328L13.5 12.962Zm0 0A3.752 3.752 0 0 1 12 15.118a3.752 3.752 0 0 1-1.5-.202" />
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Guardian Network</h3>
+          <p class="text-gray-600">Set up multiple trusted contacts, ensuring there's always someone available to answer the call.</p>
+        </a>
+        <!-- Family Dashboard Feature -->
+        <a href="#feature-dashboard" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md text-center transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-1.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25Z" />
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Family Dashboard</h3>
+          <p class="text-gray-600">A secure online portal to manage contacts, view call history, and update user details from any device.</p>
+        </a>
+        <!-- Built for Accessibility Feature -->
+        <a href="#feature-accessibility" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md text-center transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Built for Accessibility</h3>
+          <p class="text-gray-600">Booths feature tactile buttons, high-contrast displays, and voice guidance to ensure ease of use for everyone.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Us Section -->
+  <section id="about" class="py-16 px-4 md:px-8">
+    <div class="container mx-auto max-w-4xl text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">About Us</h2>
+      <p class="text-lg text-gray-600">SECURE CONNECT is founded with a mission to provide secure communication options for individuals without access to smartphones. Our system ensures connectivity, safety, and ease of use for everyone, bridging the digital divide with simple, effective technology.</p>
+    </div>
+  </section>
+  
+  <!-- Contact Us Section -->
+  <section id="contact" class="py-16 px-4 md:px-8 bg-stone-200">
+    <div class="container mx-auto max-w-xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Contact Us</h2>
+      <form class="bg-white p-8 rounded-xl shadow-lg">
+        <input type="text" placeholder="Your Name" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <input type="email" placeholder="Your Email" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <textarea rows="5" placeholder="Your Message" class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+        <button type="submit" class="w-full bg-amber-500 text-white font-bold py-3 rounded-lg shadow-md hover:bg-amber-600 transition duration-300 ease-in-out">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Registration Section -->
+  <section id="register" class="hidden py-16 px-4 md:px-8">
+    <div class="container mx-auto max-w-md">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Create an Account</h2>
+      <div id="register-message" class="hidden p-4 mb-4 rounded" role="alert"></div>
+      <form id="register-form" class="bg-white p-8 rounded-xl shadow-lg">
+        <input type="text" id="register-username" placeholder="Username" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <input type="email" id="register-email" placeholder="Email" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <input type="password" id="register-password" placeholder="Password" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <button type="submit" class="w-full bg-amber-500 text-white font-bold py-3 rounded-lg shadow-md hover:bg-amber-600 transition duration-300 ease-in-out">Register</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Login Section -->
+  <section id="login" class="hidden py-16 px-4 md:px-8">
+    <div class="container mx-auto max-w-md">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Login to Your Account</h2>
+      <div id="login-message" class="hidden p-4 mb-4 rounded" role="alert"></div>
+      <form id="login-form" class="bg-white p-8 rounded-xl shadow-lg">
+        <input type="text" id="login-username" placeholder="Username" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <input type="email" id="login-email" placeholder="Email" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <input type="password" id="login-password" placeholder="Password" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <button type="submit" class="w-full bg-amber-500 text-white font-bold py-3 rounded-lg shadow-md hover:bg-amber-600 transition duration-300 ease-in-out">Login</button>
+        <p class="mt-4 text-center text-gray-600">
+            <a href="#forgot-password" class="text-amber-600 hover:underline">Forgot Password?</a>
+        </p>
+      </form>
+    </div>
+  </section>
+  
+  <!-- Forgot Password Section -->
+  <section id="forgot-password" class="hidden py-16 px-4 md:px-8">
+    <div class="container mx-auto max-w-md">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Forgot Your Password?</h2>
+      <div id="forgot-message" class="hidden p-4 mb-4 rounded" role="alert"></div>
+      <form id="forgot-form" class="bg-white p-8 rounded-xl shadow-lg">
+        <p class="mb-4 text-center text-gray-600">Enter the email associated with your account and we'll send you a password reset link.</p>
+        <input type="email" id="forgot-email" placeholder="Your Email" required class="w-full p-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <button type="submit" class="w-full bg-amber-500 text-white font-bold py-3 rounded-lg shadow-md hover:bg-amber-600 transition duration-300 ease-in-out">Send Reset Link</button>
+        <p class="mt-4 text-center text-gray-600">
+            <a href="#login" class="text-amber-600 hover:underline">Return to Login</a>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Learn More Section -->
+  <section id="learn-more" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Diving Deeper into SECURE CONNECT</h2>
+      
+      <div class="space-y-12">
+        <!-- The Problem -->
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="md:w-1/3 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+              </svg>
+          </div>
+          <div class="md:w-2/3">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-700">The Digital Divide is Real</h3>
+            <p class="text-gray-600 leading-relaxed">In an increasingly digital world, a significant portion of the population remains disconnected. Students without personal phones and elderly individuals unfamiliar with complex technology often lack a reliable way to communicate in public spaces. This gap can lead to isolation, safety concerns, and missed connections with loved ones. SECURE CONNECT was born from the need to bridge this divide with a simple, accessible, and ultra-reliable solution.</p>
+          </div>
+        </div>
+  
+        <!-- Our Solution -->
+        <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+          <div class="md:w-1/3 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+          </div>
+          <div class="md:w-2/3">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-700">A Two-Part Innovation</h3>
+            <p class="text-gray-600 leading-relaxed"><strong class="font-semibold text-amber-700">1. The Smart ID Card:</strong> Each user receives a durable card embedded with QR and NFC technology. This card securely stores pre-registered contact information, acting as a key to our network without needing any power or complex setup.</p>
+            <p class="mt-4 text-gray-600 leading-relaxed"><strong class="font-semibold text-amber-700">2. The Smart Booth:</strong> Placed in strategic public locations, our booths are the gateways. A simple tap or scan of the card on the booth's reader instantly initiates a call to the user's designated contact. The interface is designed to be intuitive for all ages, requiring zero technical knowledge.</p>
+          </div>
+        </div>
+        
+        <!-- Technology and Security -->
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="md:w-1/3 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+          </div>
+          <div class="md:w-2/3">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-700">Secure by Design</h3>
+            <p class="text-gray-600 leading-relaxed">Security is not an afterthought; it's our foundation. All data transmitted through our network is protected with end-to-end encryption. The cards themselves contain no personally sensitive data that can be skimmed. Furthermore, our Guardian Network feature allows families to manage contacts and receive real-time notifications, providing peace of mind.</p>
+          </div>
+        </div>
+        
+        <!-- Our Vision -->
+        <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+          <div class="md:w-1/3 text-center">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+          </div>
+          <div class="md:w-2/3">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-700">Our Vision for the Future</h3>
+            <p class="text-gray-600 leading-relaxed">We envision a world where communication is a fundamental right, accessible to all, regardless of age, technical skill, or economic status. We are committed to expanding our network of Smart Booths, partnering with communities, schools, and city planners to create a truly connected public space for everyone. Join us in building a safer, more connected future.</p>
+          </div>
+        </div>
+  
+      </div>
+      
+      <div class="text-center mt-16">
+        <a href="#home" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out transform hover:scale-105 inline-block">Back to Home</a>
+      </div>
+  
+    </div>
+  </section>
+
+  <!-- Feature Detail Pages -->
+  <section id="feature-no-mobile" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-6 text-amber-600">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 4.5-15 15" />
+      </svg>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">No Mobile Needed</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Our system is built on the principle of universal access. By using a simple, durable QR/NFC card, we remove the barriers of cost, complexity, and fragility associated with smartphones. This is a game-changer for schools wanting to maintain a phone-free learning environment while ensuring student safety. For seniors, it eliminates the anxiety of navigating confusing apps and interfaces. It’s a straightforward, reliable connection that's always ready, regardless of battery life or signal strength.</p>
+      <div class="text-center mt-16">
+        <a href="#features" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out">Back to Features</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="feature-location-access" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-6 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+        </svg>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Location-Based Access</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Accessibility is key to our mission. Through partnerships with city planners, school districts, and community organizations, we identify and install our weather-resistant Smart Booths in the most critical and high-traffic areas. This creates a visible and reliable safety net across the community. Whether it's a child walking home from school or an elderly person running errands, a SECURE CONNECT booth is a beacon of safety, always within reach when it matters most.</p>
+        
+        <!-- Map Mockup -->
+        <div class="mt-12 w-full max-w-2xl mx-auto bg-stone-100 p-4 rounded-lg shadow-inner">
+            <h4 class="text-xl font-semibold text-gray-700 mb-4">Example Booth Network Map</h4>
+            <div class="relative bg-gray-300 h-64 rounded-md overflow-hidden">
+                <!-- Mock map background (simplified streets) -->
+                <div class="absolute top-1/2 left-0 w-full h-1 bg-white opacity-50 -translate-y-1/2"></div>
+                <div class="absolute top-1/4 left-0 w-full h-0.5 bg-white opacity-50 -translate-y-1/2"></div>
+                <div class="absolute top-3/4 left-0 w-full h-0.5 bg-white opacity-50 -translate-y-1/2"></div>
+                <div class="absolute left-1/2 top-0 h-full w-1 bg-white opacity-50 -translate-x-1/2"></div>
+                <div class="absolute left-1/4 top-0 h-full w-0.5 bg-white opacity-50 -translate-x-1/2"></div>
+                <div class="absolute left-3/4 top-0 h-full w-0.5 bg-white opacity-50 -translate-x-1/2"></div>
+                
+                <!-- Map Pins for Booths -->
+                <div class="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2" title="Central Park Booth">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600 drop-shadow-lg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                </div>
+                <div class="absolute top-1/2 left-3/4 transform -translate-x-1/2 -translate-y-1/2" title="Downtown Market Booth">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600 drop-shadow-lg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                </div>
+                <div class="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2" title="Northside School Booth">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600 drop-shadow-lg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-16">
+            <a href="#features" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out">Back to Features</a>
+        </div>
+    </div>
+  </section>
+
+  <section id="feature-notifications" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-6 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+        </svg>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Real-Time Notifications</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Peace of mind comes from knowing, not wondering. The instant a user initiates a call, our system dispatches automated alerts to all designated guardians via SMS and push notification. These alerts contain the user's name, the booth's address, and a map link for precise location tracking. This immediate confirmation provides crucial reassurance and allows guardians to know exactly where their loved one is, turning uncertainty into confidence in seconds.</p>
+        
+        <!-- Phone Mockup -->
+        <div class="mt-12 w-full max-w-sm mx-auto">
+            <div class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
+                <div class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white">
+                    <!-- Mock Phone Screen Content -->
+                    <div class="p-4 bg-gray-50 h-full">
+                        <div class="flex justify-between items-center text-xs text-gray-600 mb-4">
+                            <span>9:41 AM</span>
+                            <div class="flex items-center space-x-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a1 1 0 11-2 0 1 1 0 012 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M1.5 9a8.5 8.5 0 1117 0 8.5 8.5 0 01-17 0zM10 16a6 6 0 100-12 6 6 0 000 12z" clip-rule="evenodd" /></svg>
+                            </div>
+                        </div>
+                        <!-- Notification card -->
+                        <div class="bg-white p-3 rounded-2xl shadow-md border border-gray-200 animate-pulse">
+                            <div class="flex items-center space-x-3">
+                                <div class="bg-amber-500 p-1.5 rounded-lg">
+                                  <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                                </div>
+                                <span class="font-semibold text-sm text-gray-500">SECURE CONNECT</span>
+                                <span class="text-xs text-gray-400 ml-auto">now</span>
+                            </div>
+                            <div class="mt-2 text-left">
+                                <p class="font-bold text-gray-800">Call Initiated</p>
+                                <p class="text-sm text-gray-600">Alex has started a call from the booth at <span class="font-semibold">Main Street Park</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-16">
+            <a href="#features" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out">Back to Features</a>
+        </div>
+    </div>
+  </section>
+
+  <section id="feature-security" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-6 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.017h-.008v-.017Z" />
+        </svg>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Secure and Private</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">We built SECURE CONNECT on a foundation of trust. Our closed-loop network means calls can only be made to pre-approved numbers in the Guardian Network, eliminating the risk of spam or unwanted contact. All call data is protected with end-to-end encryption, and our platform is compliant with modern data privacy regulations. The ID cards act only as keys, carrying no personal data that could be exploited if lost, ensuring your family's information remains safe.</p>
+        <div class="text-center mt-16">
+            <a href="#features" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out">Back to Features</a>
+        </div>
+    </div>
+  </section>
+  
+  <section id="feature-sos" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-6 text-red-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.017h-.008v-.017Z" />
+        </svg>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-red-700">Emergency SOS</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">When every second counts, simplicity saves lives. Every Smart Booth is equipped with a large, unmistakable red SOS button. Pressing it instantly connects the user to local emergency services (911/999/112). The system automatically provides the dispatcher with the booth's exact location, eliminating any ambiguity and ensuring a faster response. Simultaneously, the Guardian Network receives an emergency alert, keeping everyone informed during a critical event.</p>
+        <div class="text-center mt-16">
+            <a href="#features" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out">Back to Features</a>
+        </div>
+    </div>
+  </section>
+
+  <section id="feature-guardian-network" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-6 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962a3.752 3.752 0 0 1-4.493 0L5.25 11.653c-1.223-1.223-.65-3.328.75-3.328h9.75c1.4 0 1.973 2.105.75 3.328L13.5 12.962Zm0 0A3.752 3.752 0 0 1 12 15.118a3.752 3.752 0 0 1-1.5-.202" />
+        </svg>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Guardian Network</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Life is busy, and people aren't always available. That's why we created the Guardian Network. From the Family Dashboard, you can add multiple trusted contacts—parents, grandparents, neighbors, or siblings. You can even set a "call-chain" priority. If the first contact doesn't answer within a few rings, the system automatically dials the next person on the list, dramatically increasing the likelihood of a successful and timely connection every time a call is made.</p>
+        <div class="text-center mt-16">
+            <a href="#features" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out">Back to Features</a>
+        </div>
+    </div>
+  </section>
+
+  <section id="feature-dashboard" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-6 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-1.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25Z" />
+        </svg>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Family Dashboard</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Our secure, 2FA-protected online dashboard puts you in complete control. Log in from any device to add or remove contacts from the Guardian Network, customize the call-chain order, and review a detailed call log with timestamps and interactive maps. You can also update the user's photo for identification and manage your notification settings. It’s a powerful, intuitive hub for managing your family's safety and connectivity.</p>
+        
+        <!-- Dashboard Mockup -->
+        <div class="mt-12 w-full max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left">
+            <div class="flex flex-wrap justify-between items-center border-b pb-4 mb-4">
+                <h4 class="text-2xl font-bold text-gray-800">Family Dashboard</h4>
+                <div class="flex items-center space-x-2">
+                    <img class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?q=80&w=2080&auto=format&fit=crop" alt="Guardian's avatar">
+                    <span class="font-semibold text-gray-600">Sarah Lee</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Left Column -->
+                <div class="md:col-span-1 space-y-4">
+                    <h5 class="font-semibold text-gray-700">User Profile</h5>
+                    <div class="bg-amber-50 p-4 rounded-lg flex items-center space-x-4">
+                        <img class="w-16 h-16 rounded-full object-cover" src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?q=80&w=1974&auto=format&fit=crop" alt="User's avatar">
+                        <div>
+                            <p class="font-bold text-amber-800">Alex Lee</p>
+                            <p class="text-sm text-gray-500">ID: SC-12345</p>
+                        </div>
+                    </div>
+                    
+                    <h5 class="font-semibold text-gray-700 pt-2">Guardian Network</h5>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between items-center p-2 bg-gray-50 rounded-md"><span>1. Sarah Lee (Mom)</span> <span class="text-xs font-medium bg-green-200 text-green-800 px-2 py-1 rounded-full">Primary</span></li>
+                        <li class="flex justify-between items-center p-2 bg-gray-50 rounded-md"><span>2. David Lee (Dad)</span></li>
+                        <li class="flex justify-between items-center p-2 bg-gray-50 rounded-md"><span>3. Jane Doe (Neighbor)</span></li>
+                    </ul>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="md:col-span-2">
+                    <h5 class="font-semibold text-gray-700">Recent Call History</h5>
+                    <div class="space-y-3 mt-4">
+                         <div class="p-4 bg-gray-50 rounded-lg">
+                             <div class="flex justify-between items-center">
+                                 <p class="font-semibold text-gray-800">Main Street Park</p>
+                                 <p class="text-sm text-gray-500">Today, 3:45 PM</p>
+                             </div>
+                             <p class="text-sm text-gray-600 mt-1">Connected to: <span class="font-medium">Sarah Lee (Mom)</span></p>
+                         </div>
+                         <div class="p-4 bg-gray-50 rounded-lg">
+                             <div class="flex justify-between items-center">
+                                 <p class="font-semibold text-gray-800">Central Library</p>
+                                 <p class="text-sm text-gray-500">Yesterday, 4:10 PM</p>
+                             </div>
+                             <p class="text-sm text-gray-600 mt-1">Connected to: <span class="font-medium">David Lee (Dad)</span></p>
+                         </div>
+                         <div class="p-4 bg-gray-50 rounded-lg">
+                             <div class="flex justify-between items-center">
+                                 <p class="font-semibold text-gray-800">Main Street Park</p>
+                                 <p class="text-sm text-gray-500">3 days ago, 3:52 PM</p>
+                             </div>
+                             <p class="text-sm text-red-600 mt-1">Call not connected</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-16">
+            <a href="#features" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out">Back to Features</a>
+        </div>
+    </div>
+  </section>
+
+  <section id="feature-accessibility" class="hidden py-16 px-4 md:px-8 bg-white">
+    <div class="container mx-auto max-w-4xl text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-6 text-amber-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
+        </svg>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Built for Accessibility</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Inclusivity is not an optional extra; it's a core design principle. Our Smart Booths adhere to ADA standards, ensuring easy access for wheelchair users. They feature large, backlit tactile buttons with Braille for visually impaired users. Clear, multilingual voice prompts guide users through each step, while high-contrast screens ensure readability for all. SECURE CONNECT is engineered to be a truly universal service that anyone can use with confidence and ease.</p>
+        <div class="text-center mt-16">
+            <a href="#features" class="px-8 py-3 rounded-full font-bold shadow-lg text-white bg-amber-500 hover:bg-amber-600 transition duration-300 ease-in-out">Back to Features</a>
+        </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-6 text-center">
+    <div class="container mx-auto">
+      <p>&copy; 2025 SECURE CONNECT. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // JavaScript for handling page navigation and user authentication
+    document.addEventListener('DOMContentLoaded', () => {
+      // Define unique keys for localStorage to avoid conflicts
+      const USERS_KEY = 'SECURE_CONNECT_users';
+      const LOGGED_IN_USER_KEY = 'SECURE_CONNECT_loggedInUser';
+
+      // Get references to all key elements
+      const sections = document.querySelectorAll('section');
+      
+      const desktopNav = document.getElementById('desktop-nav');
+      const mobileNav = document.getElementById('mobile-nav');
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      
+      const authLinks = document.getElementById('auth-links');
+      const userInfo = document.getElementById('user-info');
+      const welcomeMessage = document.getElementById('welcome-message');
+      const logoutButton = document.getElementById('logout-button');
+      
+      const authLinksMobile = document.getElementById('auth-links-mobile');
+      const userInfoMobile = document.getElementById('user-info-mobile');
+      const welcomeMessageMobile = document.getElementById('welcome-message-mobile');
+      const logoutButtonMobile = document.getElementById('logout-button-mobile');
+      
+      const registerForm = document.getElementById('register-form');
+      const registerUsernameInput = document.getElementById('register-username');
+      const registerEmailInput = document.getElementById('register-email');
+      const registerPasswordInput = document.getElementById('register-password');
+      const registerMessage = document.getElementById('register-message');
+      
+      const loginForm = document.getElementById('login-form');
+      const loginUsernameInput = document.getElementById('login-username');
+      const loginEmailInput = document.getElementById('login-email');
+      const loginPasswordInput = document.getElementById('login-password');
+      const loginMessage = document.getElementById('login-message');
+
+      const forgotForm = document.getElementById('forgot-form');
+      const forgotEmailInput = document.getElementById('forgot-email');
+      const forgotMessage = document.getElementById('forgot-message');
+
+      const genericWelcome = document.getElementById('generic-welcome');
+      const personalizedWelcome = document.getElementById('personalized-welcome');
+      const personalizedUsername = document.getElementById('personalized-username');
+
+      // Function to update the header based on login status
+      const updateAuthUI = () => {
+        const loggedInUser = localStorage.getItem(LOGGED_IN_USER_KEY);
+        if (loggedInUser) {
+          // Desktop UI
+          authLinks.classList.add('hidden');
+          userInfo.classList.remove('hidden');
+          welcomeMessage.textContent = `Welcome, ${loggedInUser}!`;
+          // Mobile UI
+          authLinksMobile.classList.add('hidden');
+          userInfoMobile.classList.remove('hidden');
+          welcomeMessageMobile.textContent = `Welcome, ${loggedInUser}!`;
+          // Hero Section UI
+          genericWelcome.classList.add('hidden');
+          personalizedWelcome.classList.remove('hidden');
+          personalizedUsername.textContent = loggedInUser;
+        } else {
+          // Desktop UI
+          authLinks.classList.remove('hidden');
+          userInfo.classList.add('hidden');
+          // Mobile UI
+          authLinksMobile.classList.remove('hidden');
+          userInfoMobile.classList.add('hidden');
+          // Hero Section UI
+          genericWelcome.classList.remove('hidden');
+          personalizedWelcome.classList.add('hidden');
+        }
+      };
+
+      // Handle URL hash changes for navigation
+      const handleHashChange = () => {
+        const hash = window.location.hash.substring(1);
+        const mainSections = ['home', 'how', 'features', 'about', 'contact'];
+        
+        // if hash is empty or one of the main sections, show them all
+        if (!hash || mainSections.includes(hash)) {
+            // Show all main content sections
+            mainSections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('hidden');
+            });
+            // Hide all other sections
+            sections.forEach(section => {
+                if (!mainSections.includes(section.id)) {
+                    section.classList.add('hidden');
+                }
+            });
+
+            if (hash) {
+                const targetElement = document.getElementById(hash);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                 window.scrollTo(0, 0);
+            }
+        } else {
+             // otherwise, show the specific section (login, register, feature page, etc.)
+            sections.forEach(section => {
+                if (section.id === hash) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+            window.scrollTo(0, 0); // Scroll to top for new "page"
+        }
+        // Hide mobile menu after navigation
+        mobileNav.classList.add('hidden');
+      };
+      
+      // Update nav links to scroll instead of hide/show
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          const targetId = href.substring(1);
+          const mainSections = ['home', 'how', 'features', 'about', 'contact'];
+
+          if (mainSections.includes(targetId)) {
+            // It's a main section link, prevent default to scroll smoothly
+            e.preventDefault();
+            window.location.hash = href;
+          }
+          // For auth links, feature links, etc., let the default hashchange handler do the work
+        });
+      });
+
+
+      // Handle mobile menu toggle
+      mobileMenuButton.addEventListener('click', () => {
+        mobileNav.classList.toggle('hidden');
+      });
+
+      // Handle registration form submission
+      registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = registerUsernameInput.value.trim();
+        const email = registerEmailInput.value.trim();
+        const password = registerPasswordInput.value.trim();
+        
+        let users = JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+        if (users[username]) {
+          registerMessage.textContent = 'Username already exists.';
+          registerMessage.classList.remove('hidden', 'bg-green-100', 'border-green-500', 'text-green-700');
+          registerMessage.classList.add('bg-red-100', 'border-red-500', 'text-red-700', 'border-l-4');
+        } else {
+          users[username] = { email, password };
+          localStorage.setItem(USERS_KEY, JSON.stringify(users));
+          registerMessage.textContent = 'Registration successful! You can now log in.';
+          registerMessage.classList.remove('hidden', 'bg-red-100', 'border-red-500', 'text-red-700');
+          registerMessage.classList.add('bg-green-100', 'border-green-500', 'text-green-700', 'border-l-4');
+          registerUsernameInput.value = '';
+          registerEmailInput.value = '';
+          registerPasswordInput.value = '';
+          setTimeout(() => {
+            window.location.hash = '#login';
+          }, 2000);
+        }
+      });
+
+      // Handle login form submission
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = loginUsernameInput.value.trim();
+        const email = loginEmailInput.value.trim();
+        const password = loginPasswordInput.value.trim();
+        
+        let users = JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+        if (users[username] && users[username].email === email && users[username].password === password) {
+          localStorage.setItem(LOGGED_IN_USER_KEY, username);
+          updateAuthUI();
+          window.location.hash = '#home'; // Redirect to home on successful login
+          loginMessage.classList.add('hidden');
+        } else {
+          loginMessage.textContent = 'Invalid username, email, or password.';
+          loginMessage.classList.remove('hidden', 'bg-green-100', 'border-green-500', 'text-green-700');
+          loginMessage.classList.add('bg-red-100', 'border-red-500', 'text-red-700', 'border-l-4');
+        }
+      });
+      
+      // Handle forgot password form submission
+      forgotForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = forgotEmailInput.value.trim();
+        let users = JSON.parse(localStorage.getItem(USERS_KEY)) || {};
+        const userFound = Object.values(users).find(user => user.email === email);
+
+        if (userFound) {
+          forgotMessage.textContent = `A password reset link has been sent to ${email}.`;
+          forgotMessage.classList.remove('hidden', 'bg-red-100', 'border-red-500', 'text-red-700');
+          forgotMessage.classList.add('bg-green-100', 'border-green-500', 'text-green-700', 'border-l-4');
+        } else {
+          forgotMessage.textContent = 'No account found with that email address.';
+          forgotMessage.classList.remove('hidden', 'bg-green-100', 'border-green-500', 'text-green-700');
+          forgotMessage.classList.add('bg-red-100', 'border-red-500', 'text-red-700', 'border-l-4');
+        }
+      });
+
+      // Handle logout button click
+      const handleLogout = () => {
+        localStorage.removeItem(LOGGED_IN_USER_KEY);
+        updateAuthUI();
+        window.location.hash = '#home'; // Redirect to home on logout
+      };
+      logoutButton.addEventListener('click', handleLogout);
+      logoutButtonMobile.addEventListener('click', handleLogout);
+
+      // Initialize on page load
+      updateAuthUI();
+      window.addEventListener('hashchange', handleHashChange);
+      handleHashChange(); // Initial call to show correct sections
+    });
+  </script>
+</body>
+</html>
